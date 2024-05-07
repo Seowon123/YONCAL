@@ -1,0 +1,13 @@
+package univ.webservice.yoncal;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class YoncalApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
