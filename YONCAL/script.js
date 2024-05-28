@@ -169,3 +169,14 @@ function updateRequiredCredits(select) {
         document.getElementById('required-major-credits').textContent = "전필영역: 0학점";
     }
 }
+
+function handleLoginLogout() {
+    const emailSpan = document.querySelector('.logged-in-email');
+    const loginLogoutBtn = document.querySelector('.login-logout-btn');
+    if (loginLogoutBtn.textContent === 'Login') {
+        window.location.href = 'login.html';
+    } else {
+        emailSpan.textContent = 'Guest';
+        loginLogoutBtn.textContent = 'Login';
+    }
+}
