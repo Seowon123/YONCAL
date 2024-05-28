@@ -12,18 +12,23 @@
 <body>
 <div class="container">
     <div class="header">
-        <!-- Display the logged-in email -->
-        <span class="logged-in-email">로그인된 이메일</span>
-        <!-- Dropdown for selecting the major -->
-        <select class="dropdown" onchange="updateRequiredCredits(this)">
-            <option value="0">학과선택</option>
-            <option value="1">디지털헬스케어학부</option>
-            <!-- Add more options here -->
-        </select>
-        <!-- Icons for save and upload actions -->
+        <!-- Displays the logo 아래 # 대신 원하시는 링크 넣으세요 -->
+        <a href="#" class="logo-link">
+            <img src="resource/image/yonsei.png" alt="Logo" class="logo">
+        </a>
+        <!-- Display the logged-in email and login/out button -->
         <div class="icon-group">
-            <i class="fas fa-save"></i>
-            <i class="fas fa-upload"></i>
+            <span class="logged-in-email">Guest</span>
+            <!-- Dropdown for selecting the major -->
+            <select class="dropdown" onchange="updateRequiredCredits(this)">
+                <option value="0">학과선택</option>
+                <option value="1">디지털헬스케어학부</option>
+                <!-- Add more options here -->
+            </select>
+            <button class="login-logout-btn" onclick="handleLoginLogout()">Login</button>
+            <!-- Icons for save and upload actions -->
+            <i class="fas fa-save" onclick="downloadCourses()"></i>
+            <i class="fas fa-upload" onclick="uploadCourses()"></i>
         </div>
     </div>
     <div class="content">
@@ -52,11 +57,11 @@
             <div class="required-credits">
                 <h3>요구 학점</h3>
                 <div class="credit-category">
-                    <span id="required-major1-credits">1전공: 42학점</span>
-                    <span id="required-major2-credits">2전공: 42학점</span>
-                    <span id="required-liberal-credits">교양: 21학점</span>
-                    <span id="required-essential-credits">필수영역: 12학점</span>
-                    <span id="required-major-credits">전필영역: 18학점</span>
+                    <span id="required-major1-credits">1전공: 0학점</span>
+                    <span id="required-major2-credits">2전공: 0학점</span>
+                    <span id="required-liberal-credits">교양: 0학점</span>
+                    <span id="required-essential-credits">필수영역: 0학점</span>
+                    <span id="required-major-credits">전필영역: 0학점</span>
                 </div>
             </div>
             <!-- Logo section, wrapped in an anchor tag -->
