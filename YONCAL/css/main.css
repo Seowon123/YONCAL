@@ -50,6 +50,12 @@ body, html {
     align-items: center;
 }
 
+    .header .logo {
+        width: 80px; /* Adjust the width as needed */
+        height: 80px; /* Adjust the height as needed */
+        margin-right: 1rem; /* Add some margin to separate from other elements */
+    }
+
 .logged-in-email {
     font-size: 1.2rem;
 }
@@ -194,6 +200,10 @@ body, html {
     padding: 1rem;
     overflow-y: auto; /* To handle overflow */
 }
+
+    .right-panel .logo-link {
+        margin-top: auto; /* Push the logo to the bottom */
+    }
 
 .current-credits, .required-credits {
     background-color: #d9e9ff;
