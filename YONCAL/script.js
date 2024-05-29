@@ -169,3 +169,98 @@ function updateRequiredCredits(select) {
         document.getElementById('required-major-credits').textContent = "전필영역: 0학점";
     }
 }
+
+
+function downloadCourses() {
+    const courses = [];
+    document.querySelectorAll('.semester').forEach(semester => {
+        const semesterTitle = semester.querySelector('.semester-title').value;
+        const semesterCourses = [];
+        semester.querySelectorAll('.course input').forEach(course => {
+            const courseName = course.value;
+            const credits = course.getAttribute('data-credits');
+            const category = course.getAttribute('data-category');
+            semesterCourses.push({ courseName, credits, category });
+        });
+        courses.push({ semesterTitle, semesterCourses });
+    });
+
+    const selectedMajor = document.querySelector('.dropdown').value;
+    const data = { selectedMajor, courses };
+
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "courses.json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+}
+
+function uploadCourses() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'application/json';
+    input.onchange = function(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const content = e.target.result;
+            const data = JSON.parse(content);
+            loadCourses(data);
+        };
+        reader.readAsText(file);
+    };
+    input.click();
+}
+
+function loadCourses(data) {
+    const { selectedMajor, courses } = data;
+    const leftPanel = document.getElementById('left-panel');
+    const addSemesterButton = document.querySelector('.add-semester');
+
+    // Set the selected major
+    document.querySelector('.dropdown').value = selectedMajor;
+    updateRequiredCredits(document.querySelector('.dropdown'));
+
+    // Clear existing semesters except the add-semester button
+    leftPanel.innerHTML = '';
+    leftPanel.appendChild(addSemesterButton);
+
+    // Iterate through the uploaded courses to create the necessary HTML elements
+    courses.forEach(course => {
+        const semesterHtml = `
+            <div class="semester">
+                <div class="semester-header">
+                    <input type="text" value="${course.semesterTitle}" readonly class="semester-title">
+                    <div class="actions">
+                        <i class="fas fa-pencil-alt" onclick="editSemesterTitle(this)"></i>
+                        <span class="delete-semester" onclick="deleteSemester(this)">학기 지우기</span>
+                    </div>
+                </div>
+                ${course.semesterCourses.map(c => `
+                    <div class="course">
+                        <input type="text" value="${c.courseName}" data-credits="${c.credits}" data-category="${c.category}">
+                        <i class="fas fa-trash-alt" onclick="deleteCourse(this)"></i>
+                    </div>
+                `).join('')}
+                <div class="add-course" onclick="addCourse(this)">
+                    <i class="fas fa-plus"></i>
+                </div>
+            </div>`;
+        addSemesterButton.insertAdjacentHTML('beforebegin', semesterHtml);
+    });
+
+    calculateCredits();
+}
+
+function handleLoginLogout() {
+    const emailSpan = document.querySelector('.logged-in-email');
+    const loginLogoutBtn = document.querySelector('.login-logout-btn');
+    if (loginLogoutBtn.textContent === 'Login') {
+        window.location.href = 'login.html';
+    } else {
+        emailSpan.textContent = 'Guest';
+        loginLogoutBtn.textContent = 'Login';
+    }
+}
