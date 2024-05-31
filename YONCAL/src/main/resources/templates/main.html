@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoncal Main</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Link to the main CSS file -->
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <!-- Display the logged-in email -->
+        <a href="#" class="logo-link">
+            <img src="../image/yonsei.png" alt="Logo" class="logo">
+        </a>
+        <div class="icon-group">
+            <!-- Dropdown for selecting the major -->
+            <select class="dropdown" onchange="updateRequiredCredits(this)">
+                <option value="0">학과선택</option>
+                <option value="1">디지털헬스케어학부</option>
+                <!-- Add more options here -->
+            </select>
+            <button class="login-logout-btn" onclick="handleLoginLogout()">Logout</button>
+            <!-- Icons for save and upload actions -->
+            <i class="fas fa-save" onclick="downloadCourses()"></i>
+            <i class="fas fa-upload" onclick="uploadCourses()"></i>
+        </div>
+    </div>
+    <div class="content">
+        <!-- Left panel for semesters and courses -->
+        <div class="left-panel" id="left-panel">
+            <!-- Button to add a new semester -->
+            <div class="add-semester" onclick="addSemester()">
+                <i class="fas fa-plus"></i>
+            </div>
+        </div>
+        <!-- Right panel for current and required credits -->
+        <div class="right-panel">
+            <!-- Current credits section -->
+            <div class="current-credits">
+                <h3>현재 이수 학점</h3>
+                <div class="credit-category">
+                    <span id="current-basic-credits">교양기초: 0학점</span>
+                    <span id="current-liberal-credits">교양: 0학점</span>
+                    <span id="current-essential-credits">필수영역: 0학점</span>
+                    <span id="current-major-credits">전필영역: 0학점</span>
+                    <span id="current-major1-credits">1전공: 0학점</span>
+                    <span id="current-major2-credits">2전공: 0학점</span>
+                </div>
+            </div>
+            <!-- Required credits section -->
+            <div class="required-credits">
+                <h3>요구 학점</h3>
+                <div class="credit-category">
+                    <span id="required-basic-credits">교양기초: 11학점</span>
+                    <span id="required-liberal-credits">교양: 21학점</span>
+                    <span id="required-essential-credits">필수영역: 12학점</span>
+                    <span id="required-major-credits">전필영역: 18학점</span>
+                    <span id="required-major1-credits">1전공: 42학점</span>
+                    <span id="required-major2-credits">2전공: 42학점</span>
+                </div>
+            </div>
+            <!-- Logo section, wrapped in an anchor tag -->
+            <a href="https://www.yonsei.ac.kr/wj/support/graduation7.jsp" target="_blank" class="logo-link">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>YONCAL</h1>
+                    <p>연세대 학점 계산기</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<script src="../js/script.js"></script>
+</body>
+</html>
